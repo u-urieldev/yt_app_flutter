@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'yt_player.dart';
 
-const String videoLink = "https://www.youtube.com/watch?v=W-rHIsDFrzQ&t=317s&ab_channel=CarelessCoders";
+
 void main() {
   runApp(const MyApp());
 }
@@ -30,45 +31,44 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: YoutubePlayer.convertUrlToId(videoLink) ?? "",
-    flags: const YoutubePlayerFlags(
-      autoPlay: false,
-      mute: true,
-      isLive: false,
-    ),
-  );
+  // final YoutubePlayerController _controller = YoutubePlayerController(
+  //   initialVideoId: YoutubePlayer.convertUrlToId(videoLink) ?? "",
+  //   flags: const YoutubePlayerFlags(
+  //     autoPlay: false,
+  //     mute: true,
+  //     isLive: false,
+  //   ),
+  // );
 
   @override
   void deactivate() {
-    _controller.pause();
+    //_controller.pause();
     super.deactivate();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    //_controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Not YouTube"),
+      appBar: AppBar(
+        title: const Text("Not YouTube"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            YouTubeWidget(url: "https://www.youtube.com/watch?v=W-rHIsDFrzQ&t=317s&ab_channel=CarelessCoders"),
+            // ----------------
+            YouTubeWidget(url: "https://www.youtube.com/watch?v=3gU1OLKBcys&t=522s&ab_channel=LazyTechNo"),
+          ],
         ),
-        body: Center(
-          child: Container(
-            child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Colors.amber,
-              progressColors: const ProgressBarColors(
-                playedColor: Colors.amber,
-                handleColor: Colors.amberAccent,
-              ),
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }
+
+
