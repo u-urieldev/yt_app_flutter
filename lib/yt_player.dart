@@ -18,10 +18,11 @@ class YouTubeWidget extends StatelessWidget {
   }
 
   
-  YouTubeWidget({required String this.url}){ _setController(); }
+  YouTubeWidget({required String this.url});
 
   @override
   Widget build(BuildContext context) {
+    _setController();
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: YoutubePlayer(
