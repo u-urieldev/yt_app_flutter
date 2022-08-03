@@ -16,7 +16,6 @@ class YouTubeWidget extends StatelessWidget {
             ),
     );
   }
-
   
   YouTubeWidget({required String this.url});
 

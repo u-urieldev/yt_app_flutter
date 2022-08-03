@@ -31,15 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // final YoutubePlayerController _controller = YoutubePlayerController(
-  //   initialVideoId: YoutubePlayer.convertUrlToId(videoLink) ?? "",
-  //   flags: const YoutubePlayerFlags(
-  //     autoPlay: false,
-  //     mute: true,
-  //     isLive: false,
-  //   ),
-  // );
-
+  
   @override
   void deactivate() {
     //_controller.pause();
