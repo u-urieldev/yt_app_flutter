@@ -32,26 +32,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String video_t = "";
+  //String video_t = "";
 
-  _setVideo() {
-    _setYT().then((value) {
-      setState(() {
-        video_t = value;
-      });
-    });
-  }
+  // _setVideo() {
+  //   _setYT().then((value) {
+  //     setState(() {
+  //       video_t = value;
+  //     });
+  //   });
+  // }
 
-  Future<String> _setYT() async {
-    var yt = YoutubeExplode();
-    Video video =
-        await yt.videos.get('https://www.youtube.com/watch?v=A_g3lMcWVy0');
+  // Future<String> _setYT() async {
+  //   var yt = YoutubeExplode();
+  //   Video video =
+  //       await yt.videos.get('https://www.youtube.com/watch?v=A_g3lMcWVy0');
 
-    print(video.title);
-    print(video);
+  //   print(video.title);
+  //   print(video);
 
-    return video.title;
-  }
+  //   return video.title;
+  // }
 
   @override
   void initState() {
@@ -68,12 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView(
           children: [
-            ReusableVideoCard(image: 'https://getwallpapers.com/wallpaper/full/3/d/3/1193570-vivid-wallpaper-1920x1080-for-phone.jpg',
-            text: 'Video 1',),
-            ReusableVideoCard(image: 'https://4.bp.blogspot.com/-JTVZ2ajkvrU/UiIb8LLrIII/AAAAAAAAGb4/ioF8FtLFzR0/s1600/1307306470-nature_wallpaper_hd_hd_nature_3.jpg',
-            text: 'Video 2 with a large video nameeee nameee',),
-            ReusableVideoCard(image: 'https://3.bp.blogspot.com/-SDHyhNKdNT4/VZJQ1qy2MRI/AAAAAAAAR5E/7BTDMmC4YqQ/s1600/hd-wallpaper-03.jpg',
-            text: 'Video 3 ',),
+            ReusableVideoCard(video_id: 'A_g3lMcWVy0'),
+            ReusableVideoCard(video_id: 'VRt66cN6PLw'),
+            // ReusableVideoCard(url: 'https://3.bp.blogspot.com/-SDHyhNKdNT4/VZJQ1qy2MRI/AAAAAAAAR5E/7BTDMmC4YqQ/s1600/hd-wallpaper-03.jpg',
+            // text: 'Video 3 ',),
           ],
         ),
       ),
