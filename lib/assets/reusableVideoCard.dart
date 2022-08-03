@@ -7,6 +7,7 @@ class ReusableVideoCard extends StatelessWidget {
       : super(key: key);
 
   Future<Video> _setMetadata() async {
+    // The video object contains all in relation of a YouTube Video
     var yt = YoutubeExplode();
     Video video =
         await yt.videos.get('https://www.youtube.com/watch?v=$video_id');
@@ -22,7 +23,6 @@ class ReusableVideoCard extends StatelessWidget {
         String title = "Loading...";
 
         if (snapshot.hasData) {
-          print(snapshot);
           title = snapshot.data!.title.toString();
         }
 
@@ -35,6 +35,7 @@ class ReusableVideoCard extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
             child: Card(
               elevation: 5,
+              //semanticContainer and clipBehavior allow the circle border in the image.
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               shape: RoundedRectangleBorder(
@@ -45,8 +46,9 @@ class ReusableVideoCard extends StatelessWidget {
                   Container(
                     height: 170,
                     width: double.infinity,
+                    //This link contains the thumbnail of the video. 
                     child: Image.network(
-                      'https://img.youtube.com/vi/$video_id/0.jpg',
+                      'https://img.youtube.com/vi/$video_id/0.jpg', 
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -58,7 +60,7 @@ class ReusableVideoCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             title,
-                            overflow: TextOverflow.clip,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           flex: 6,
                         ),
