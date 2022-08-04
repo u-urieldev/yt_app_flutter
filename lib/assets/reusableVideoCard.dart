@@ -3,8 +3,7 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class ReusableVideoCard extends StatelessWidget {
   String video_id;
-  ReusableVideoCard({Key? key, required this.video_id})
-      : super(key: key);
+  ReusableVideoCard({Key? key, required this.video_id}) : super(key: key);
 
   Future<Video> _setMetadata() async {
     // The video object contains all in relation of a YouTube Video
@@ -26,60 +25,44 @@ class ReusableVideoCard extends StatelessWidget {
           title = snapshot.data!.title.toString();
         }
 
-        return GestureDetector(
-          onTap: () => print('Picado pa'),
-          child: Container(
-            height: 220,
-            width: double.infinity,
-            color: Colors.white,
-            margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
-            child: Card(
-              elevation: 5,
-              //semanticContainer and clipBehavior allow the circle border in the image.
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(11)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        return Container(
+          width: double.infinity,
+          height: 200,
+          margin: EdgeInsets.all(9.0),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(11.0), color: Colors.red),
+          child: Stack(children: [
+            Image.network(
+              'https://img.youtube.com/vi/$video_id/0.jpg',
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.bottomLeft,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.center,
+                    colors: [Colors.black, Colors.transparent]),
+              ),
+              child: Row(
                 children: [
-                  Container(
-                    height: 170,
-                    width: double.infinity,
-                    //This link contains the thumbnail of the video. 
-                    child: Image.network(
-                      'https://img.youtube.com/vi/$video_id/0.jpg', 
-                      fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(color: Colors.white, fontSize: 15.0),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(13, 8, 12, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            title,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          flex: 6,
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => print('Options'),
-                            child: const Icon(Icons.more_horiz),
-                          ),
-                          flex: 1,
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),
-          ),
+          ]),
         );
       },
     );
   }
 }
+

@@ -15,7 +15,7 @@ class VideosScreen extends StatelessWidget {
           children: [
             // video_id is the last part in a YouTube link video
             ReusableVideoCard(video_id: 'A_g3lMcWVy0'),
-            ReusableVideoCard(video_id: 'VRt66cN6PLw'),
+            ReusableVideoCard(video_id: 'Cr8K88UcO0s'),
           ],
         ),
       ),
