@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:animated_background/animated_background.dart';
+import '../utilities/input_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -32,24 +33,11 @@ class _LoginScreenState extends State<LoginScreen>
         child: AnimatedBackground(
           vsync: this,
           behaviour: RandomParticleBehaviour(options: particles),
-          child: Center(
+          child: const Center(
             child: InputForm(),
           ),
         ),
       ),
     );
-  }
-}
-
-class InputForm extends StatelessWidget {
-  const InputForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      
-    ],);
   }
 }
