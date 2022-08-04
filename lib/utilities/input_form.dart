@@ -25,11 +25,19 @@ class _InputFormState extends State<InputForm> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Image.network('https://logodownload.org/wp-content/uploads/2018/09/youtube-go-logo-5.png', width: 120,),
+        const SizedBox(height: 50),
         ReusableInput(controller: controllerEmail, label: 'E-mail'),
         ReusableInput(controller: controllerPass, label: 'Password'),
         const SizedBox(height: 30),
-        ReusableButton(controllerEmail: controllerEmail, controllerPass: controllerPass, text: 'Login'),
-        ReusableButton(controllerEmail: controllerEmail, controllerPass: controllerPass, text: 'Register'),
+        ReusableButton(
+            controllerEmail: controllerEmail,
+            controllerPass: controllerPass,
+            text: 'Login'),
+        ReusableButton(
+            controllerEmail: controllerEmail,
+            controllerPass: controllerPass,
+            text: 'Register'),
       ],
     );
   }
@@ -58,7 +66,10 @@ class ReusableButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5), color: Colors.red),
         child: Center(
-          child: Text(text, style: const TextStyle(color: Colors.black),),
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -80,17 +91,20 @@ class ReusableInput extends StatelessWidget {
     return Container(
       width: 200,
       height: 50,
-      margin: EdgeInsets.only(bottom: 30),
+      margin: const EdgeInsets.only(bottom: 30),
       child: TextField(
         controller: controller,
         style: const TextStyle(color: Colors.white),
         cursorColor: Colors.white,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(10),
-            focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white),),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white)),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
             labelText: label,
-            labelStyle: const TextStyle(color: Colors.white)),  
+            labelStyle: const TextStyle(color: Colors.white)),
       ),
     );
   }

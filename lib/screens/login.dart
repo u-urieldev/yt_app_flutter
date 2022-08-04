@@ -11,18 +11,19 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
+
   ParticleOptions particles = const ParticleOptions(
-    baseColor: Colors.red,
-    spawnOpacity: 0.0,
-    opacityChangeRate: 0.25,
-    minOpacity: 0.1,
-    maxOpacity: 0.4,
-    particleCount: 20,
-    spawnMaxRadius: 9.0,
-    spawnMaxSpeed: 50.0,
-    spawnMinSpeed: 15,
-    spawnMinRadius: 4.0,
+  baseColor: Colors.red,
+  spawnOpacity: 0.0,
+  opacityChangeRate: 0.25,
+  minOpacity: 0.1,
+  maxOpacity: 0.4,
+  particleCount: 20,
+  spawnMaxRadius: 9.0,
+  spawnMaxSpeed: 50.0,
+  spawnMinSpeed: 15,
+  spawnMinRadius: 4.0,
   );
 
   @override
