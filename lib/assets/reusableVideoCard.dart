@@ -25,41 +25,54 @@ class ReusableVideoCard extends StatelessWidget {
           title = snapshot.data!.title.toString();
         }
 
-        return Container(
-          width: double.infinity,
-          height: 200,
-          margin: EdgeInsets.all(9.0),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(11.0), color: Colors.red),
-          child: Stack(children: [
-            Image.network(
-              'https://img.youtube.com/vi/$video_id/0.jpg',
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-            Container(
-              width: double.infinity,
-              alignment: Alignment.bottomLeft,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.center,
-                    colors: [Colors.black, Colors.transparent]),
+        return GestureDetector(
+          onTap: () => print('picado pa'),
+          child: Container(
+            width: double.infinity,
+            height: 200,
+            margin: EdgeInsets.all(9.0),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(11.0)),
+            child: Stack(children: [
+              Image.network(
+                'https://img.youtube.com/vi/$video_id/0.jpg',
+                fit: BoxFit.cover,
+                width: double.infinity,
               ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      title,
-                      style: TextStyle(color: Colors.white, fontSize: 15.0),
-                    ),
+              Container(
+                  width: double.infinity,
+                  alignment: Alignment.bottomLeft,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.center,
+                        colors: [Colors.black, Colors.transparent]),
                   ),
-                ],
-              ),
-            ),
-          ]),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(11, 0, 4, 6),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              title,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: Colors.white, fontSize: 15.0),
+                            ),
+                            flex: 6,
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => print('Options'),
+                              child: const Icon(Icons.more_horiz, color: Colors.white, size: 27,),
+                            ),
+                            flex: 1,
+                          ),
+                        ]),
+                  ))
+            ]),
+          ),
         );
       },
     );
