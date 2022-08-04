@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: '/',
+      initialRoute: '/videos',
       routes: {
         '/' : (context) => const LoginScreen(),
         '/videos':(context) => const VideosScreen(),

@@ -9,6 +9,7 @@ class VideosScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Not-YouTube'),
+        backgroundColor: Colors.black,
       ),
       body: Center(
         child: ListView(
