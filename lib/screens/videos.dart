@@ -8,7 +8,7 @@ class VideosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Not-YouTube'),
+        title: const Text('Not-YouTube'),
         backgroundColor: Colors.black,
       ),
       body: Center(

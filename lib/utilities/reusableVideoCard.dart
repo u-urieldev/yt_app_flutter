@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:yt_app/screens/player.dart';
-import 'package:yt_app/screens/videos.dart';
 
 const TEXT_CARD_STYLE = TextStyle(color: Colors.white, fontSize: 15.0);
 
