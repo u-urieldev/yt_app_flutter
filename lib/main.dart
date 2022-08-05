@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'yt_player.dart';
-
+import 'screens/videos.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,53 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'YouTube App',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(),
+      home: const VideosScreen(),
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  
-  @override
-  void deactivate() {
-    //_controller.pause();
-    super.deactivate();
-  }
-
-  @override
-  void dispose() {
-    //_controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Not YouTube"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            YouTubeWidget(url: "https://www.youtube.com/watch?v=W-rHIsDFrzQ&t=317s&ab_channel=CarelessCoders"),
-            // ----------------
-            YouTubeWidget(url: "https://www.youtube.com/watch?v=3gU1OLKBcys&t=522s&ab_channel=LazyTechNo"),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
