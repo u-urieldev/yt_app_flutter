@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yt_app/screens/videos.dart';
 
 class InputForm extends StatefulWidget {
   const InputForm({
@@ -25,7 +26,10 @@ class _InputFormState extends State<InputForm> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.network('https://logodownload.org/wp-content/uploads/2018/09/youtube-go-logo-5.png', width: 120,),
+        Image.network(
+          'https://logodownload.org/wp-content/uploads/2018/09/youtube-go-logo-5.png',
+          width: 120,
+        ),
         const SizedBox(height: 50),
         ReusableInput(controller: controllerEmail, label: 'E-mail'),
         ReusableInput(controller: controllerPass, label: 'Password'),
@@ -58,7 +62,12 @@ class ReusableButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print(controllerEmail.text + controllerPass.text),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const VideosScreen(),
+        ),
+      ), // controllerEmail.text + controllerPass.text
       child: Container(
         width: 200,
         height: 50,
@@ -68,7 +77,10 @@ class ReusableButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),

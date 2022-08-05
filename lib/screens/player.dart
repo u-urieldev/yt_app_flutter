@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yt_app/yt_player.dart';
+import 'package:yt_app/utilities/yt_player.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 const kTextVideoPlayer = TextStyle(color: Colors.red);
@@ -69,8 +69,15 @@ class MetadataSection extends StatelessWidget {
     return Text(text + '\n', style: kMetadataVideo);
   }
 
+  void durationText(Duration? duration){
+    print(duration.toString().split('.').first.padLeft(8, "0"));
+
+    
+  }
+
   @override
   Widget build(BuildContext context) {
+    durationText(video.duration);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
@@ -85,7 +92,8 @@ class MetadataSection extends StatelessWidget {
                 videoText('Author'),
                 metadataText(video.author),
                 videoText('Duration'),
-                metadataText(video.duration.toString()),
+                // Line to show in format hh:mm:ss
+                metadataText(video.duration.toString().split('.').first.padLeft(8, "0")), 
               ],
             ),
           ),

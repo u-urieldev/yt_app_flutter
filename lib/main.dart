@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yt_app/screens/login.dart';
 import 'screens/videos.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const VideosScreen(),
+      home: const LoginScreen(),
     );
   }
 }
