@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yt_app/screens/login.dart';
+import 'package:yt_app/screens/player.dart';
 import 'screens/videos.dart';
 
 void main() {
@@ -17,11 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: '/',
-      routes: {
-        '/' : (context) => const LoginScreen(),
-        '/videos':(context) => const VideosScreen(),
-      },
+      home: VideosScreen(),
     );
   }
 }

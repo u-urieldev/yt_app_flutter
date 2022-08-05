@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../assets/reusableVideoCard.dart';
+import '../utilities/reusableVideoCard.dart';
 
 class VideosScreen extends StatelessWidget {
   const VideosScreen({Key? key}) : super(key: key);

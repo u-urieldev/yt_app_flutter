@@ -3,12 +3,12 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class YouTubeWidget extends StatelessWidget {
-  final String url;
+  final String video_id;
   late YoutubePlayerController _controller;
   
   void _setController(){
     _controller = YoutubePlayerController(
-            initialVideoId: YoutubePlayer.convertUrlToId(url) ?? "",
+            initialVideoId: video_id,
             flags: const YoutubePlayerFlags(
               autoPlay: false,
               mute: true,
@@ -17,21 +17,18 @@ class YouTubeWidget extends StatelessWidget {
     );
   }
   
-  YouTubeWidget({required String this.url});
+  YouTubeWidget({required String this.video_id});
 
   @override
   Widget build(BuildContext context) {
     _setController();
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.red,
-        progressColors: const ProgressBarColors(
-          playedColor: Colors.red,
-          handleColor: Colors.redAccent,
-        ),
+    return YoutubePlayer(
+      controller: _controller,
+      showVideoProgressIndicator: true,
+      progressIndicatorColor: Colors.red,
+      progressColors: const ProgressBarColors(
+        playedColor: Colors.red,
+        handleColor: Colors.redAccent,
       ),
     );
   }
