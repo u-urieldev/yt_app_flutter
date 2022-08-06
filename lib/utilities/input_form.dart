@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yt_app/screens/videos.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class InputForm extends StatefulWidget {
   const InputForm({
@@ -13,10 +14,13 @@ class InputForm extends StatefulWidget {
 class _InputFormState extends State<InputForm> {
   final controllerEmail = TextEditingController();
   final controllerPass = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+
 
   someAction() {
     print(controllerEmail.text);
     print(controllerPass.text);
+    
 
     // Navigator.push(
     //     context,
