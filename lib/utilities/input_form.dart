@@ -9,10 +9,6 @@ class InputFormS extends StatelessWidget {
   final controllerPass = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  void register() async {
-    print('Register User');
-  }
-
   void login() async {
     print('User login');
   }
@@ -27,13 +23,20 @@ class InputFormS extends StatelessWidget {
           width: 120,
         ),
         const SizedBox(height: 50),
-        ReusableInput(controller: controllerEmail, label: 'E-mail'),
-        ReusableInput(controller: controllerPass, label: 'Password'),
+        ReusableInput(
+          controller: controllerEmail,
+          label: 'E-mail',
+          type: TextInputType.emailAddress,
+        ),
+        ReusableInput(
+          controller: controllerPass,
+          label: 'Password',
+          type: TextInputType.visiblePassword,
+        ),
         const SizedBox(height: 30),
         GestureDetector(
           child: const ReusableButton(text: 'Login'),
           onTap: () {
-            login();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -44,14 +47,20 @@ class InputFormS extends StatelessWidget {
         ),
         GestureDetector(
           child: const ReusableButton(text: 'Register'),
-          onTap: () {
-            register();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VideosScreen(),
-              ),
-            );
+          onTap: () async {
+            try {
+              final newUser = await _auth.createUserWithEmailAndPassword(
+                  email: controllerEmail.text, password: controllerPass.text);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(),
+                ),
+              );
+            } catch (e) {
+              print(e);
+            }
           },
         )
       ],
@@ -91,10 +100,12 @@ class ReusableInput extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.label,
+    required this.type,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String label;
+  final TextInputType type;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +114,7 @@ class ReusableInput extends StatelessWidget {
       height: 50,
       margin: const EdgeInsets.only(bottom: 30),
       child: TextField(
+        keyboardType: type,
         controller: controller,
         style: const TextStyle(color: Colors.white),
         cursorColor: Colors.white,
