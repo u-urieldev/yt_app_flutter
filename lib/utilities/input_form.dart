@@ -1,36 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:yt_app/screens/videos.dart';
 
-class InputForm extends StatefulWidget {
-  const InputForm({
-    Key? key,
-  }) : super(key: key);
+class InputFormS extends StatelessWidget {
+  InputFormS({Key? key}) : super(key: key);
 
-  @override
-  State<InputForm> createState() => _InputFormState();
-}
-
-class _InputFormState extends State<InputForm> {
   final controllerEmail = TextEditingController();
   final controllerPass = TextEditingController();
 
-  someAction(){
-    print(controllerEmail.text);
-    print(controllerPass.text);
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const VideosScreen(),
-        ),
-      );
+  void register() async {
+    print('Register User');
   }
 
-  @override
-  void dispose() {
-    controllerEmail.dispose();
-    controllerPass.dispose();
-    super.dispose();
+  void login() async {
+    print('User login');
   }
 
   @override
@@ -46,12 +28,30 @@ class _InputFormState extends State<InputForm> {
         ReusableInput(controller: controllerEmail, label: 'E-mail'),
         ReusableInput(controller: controllerPass, label: 'Password'),
         const SizedBox(height: 30),
-        ReusableButton(
-            text: 'Login',
-            action: someAction(),),
-        ReusableButton(
-            text: 'Register',
-            action: someAction(),),
+        GestureDetector(
+          child: const ReusableButton(text: 'Login'),
+          onTap: () {
+            login();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const VideosScreen(),
+              ),
+            );
+          },
+        ),
+        GestureDetector(
+          child: const ReusableButton(text: 'Register'),
+          onTap: () {
+            register();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VideosScreen(),
+              ),
+            );
+          },
+        )
       ],
     );
   }
@@ -60,31 +60,24 @@ class _InputFormState extends State<InputForm> {
 class ReusableButton extends StatelessWidget {
   const ReusableButton({
     Key? key,
-    required this.action,
     required this.text,
   }) : super(key: key);
 
-  final VoidCallback action;
   final String text;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: action, // controllerEmail.text + controllerPass.text
-      child: Container(
-        width: 200,
-        height: 50,
-        margin: const EdgeInsets.only(bottom: 9.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5), color: Colors.red),
-        child: Center(
-          child: Text(
-            text,
-            style: const TextStyle(
-                color: Colors.black,
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold),
-          ),
+    return Container(
+      width: 200,
+      height: 50,
+      margin: const EdgeInsets.only(bottom: 9.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5), color: Colors.red),
+      child: Center(
+        child: Text(
+          text,
+          style: const TextStyle(
+              color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
         ),
       ),
     );
