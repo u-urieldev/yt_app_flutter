@@ -33,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen>
         child: AnimatedBackground(
           vsync: this,
           behaviour: RandomParticleBehaviour(options: particles),
-          child: const Center(
-            child: InputForm(),
+          child: Center(
+            child: InputFormS(),
           ),
         ),
       ),
