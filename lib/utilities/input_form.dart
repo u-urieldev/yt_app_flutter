@@ -14,6 +14,18 @@ class _InputFormState extends State<InputForm> {
   final controllerEmail = TextEditingController();
   final controllerPass = TextEditingController();
 
+  someAction(){
+    print(controllerEmail.text);
+    print(controllerPass.text);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const VideosScreen(),
+        ),
+      );
+  }
+
   @override
   void dispose() {
     controllerEmail.dispose();
@@ -35,13 +47,11 @@ class _InputFormState extends State<InputForm> {
         ReusableInput(controller: controllerPass, label: 'Password'),
         const SizedBox(height: 30),
         ReusableButton(
-            controllerEmail: controllerEmail,
-            controllerPass: controllerPass,
-            text: 'Login'),
+            text: 'Login',
+            action: someAction(),),
         ReusableButton(
-            controllerEmail: controllerEmail,
-            controllerPass: controllerPass,
-            text: 'Register'),
+            text: 'Register',
+            action: someAction(),),
       ],
     );
   }
@@ -50,24 +60,17 @@ class _InputFormState extends State<InputForm> {
 class ReusableButton extends StatelessWidget {
   const ReusableButton({
     Key? key,
-    required this.controllerEmail,
-    required this.controllerPass,
+    required this.action,
     required this.text,
   }) : super(key: key);
 
-  final TextEditingController controllerEmail;
-  final TextEditingController controllerPass;
+  final VoidCallback action;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const VideosScreen(),
-        ),
-      ), // controllerEmail.text + controllerPass.text
+      onTap: action, // controllerEmail.text + controllerPass.text
       child: Container(
         width: 200,
         height: 50,
