@@ -14,16 +14,16 @@ class _InputFormState extends State<InputForm> {
   final controllerEmail = TextEditingController();
   final controllerPass = TextEditingController();
 
-  someAction(){
+  someAction() {
     print(controllerEmail.text);
     print(controllerPass.text);
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const VideosScreen(),
-        ),
-      );
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const VideosScreen(),
+    //     ),
+    //   );
   }
 
   @override
@@ -47,11 +47,18 @@ class _InputFormState extends State<InputForm> {
         ReusableInput(controller: controllerPass, label: 'Password'),
         const SizedBox(height: 30),
         ReusableButton(
-            text: 'Login',
-            action: someAction(),),
+          text: 'Login',
+          action: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const VideosScreen(),
+            ),
+          ),
+        ),
         ReusableButton(
-            text: 'Register',
-            action: someAction(),),
+          text: 'Register',
+          action: () => print('Login'),
+        ),
       ],
     );
   }
