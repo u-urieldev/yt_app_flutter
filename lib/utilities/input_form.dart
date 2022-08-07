@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:yt_app/screens/videos.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class InputFormS extends StatelessWidget {
-  InputFormS({Key? key}) : super(key: key);
+const kButtonLoginStyle = TextStyle(
+              color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold);
 
+class InputFormS extends StatefulWidget {
+  const InputFormS({Key? key}) : super(key: key);
+
+  @override
+  State<InputFormS> createState() => _InputFormSState();
+}
+
+class _InputFormSState extends State<InputFormS> {
   final controllerEmail = TextEditingController();
   final controllerPass = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  Widget loggin_button = const Text('Login', style: kButtonLoginStyle,);
+  Widget register_button = const Text('Register', style: kButtonLoginStyle,);
+  Widget progress_widget = const CircularProgressIndicator(color: Colors.black);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +42,12 @@ class InputFormS extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         GestureDetector(
-          child: const ReusableButton(text: 'Login'),
+          child: ReusableButton(widgetToShow: loggin_button),
           onTap: () async {
+            setState(() {
+              loggin_button = progress_widget;
+            });
+
             try {
               final user = await _auth.signInWithEmailAndPassword(
                   email: controllerEmail.text, password: controllerPass.text);
@@ -49,8 +64,12 @@ class InputFormS extends StatelessWidget {
           },
         ),
         GestureDetector(
-          child: const ReusableButton(text: 'Register'),
+          child: ReusableButton(widgetToShow: register_button),
           onTap: () async {
+            setState(() {
+              register_button = progress_widget;
+            });
+
             try {
               final newUser = await _auth.createUserWithEmailAndPassword(
                   email: controllerEmail.text, password: controllerPass.text);
@@ -72,12 +91,12 @@ class InputFormS extends StatelessWidget {
 }
 
 class ReusableButton extends StatelessWidget {
-  const ReusableButton({
+  ReusableButton({
     Key? key,
-    required this.text,
+    required this.widgetToShow,
   }) : super(key: key);
 
-  final String text;
+  final Widget widgetToShow;
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +107,7 @@ class ReusableButton extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5), color: Colors.red),
       child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(
-              color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
-        ),
+        child: widgetToShow,
       ),
     );
   }
