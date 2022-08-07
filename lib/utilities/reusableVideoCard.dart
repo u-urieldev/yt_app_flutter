@@ -15,14 +15,6 @@ class ReusableVideoCard extends StatelessWidget {
   ReusableVideoCard({Key? key, required this.video_id, required this.reference, required this.video_name})
       : super(key: key);
 
-  // Future<Video> _setMetadata() async {
-  //   // The video object contains all in relation of a YouTube Video
-  //   var yt = YoutubeExplode();
-  //   Video video =
-  //       await yt.videos.get('https://www.youtube.com/watch?v=$video_id');
-
-  //   return video;
-  // }
 
   void editVideo(firestore, idTxt) async{
     var yt = YoutubeExplode();
