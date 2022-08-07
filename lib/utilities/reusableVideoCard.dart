@@ -1,12 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:yt_app/screens/player.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../screens/videos.dart';
 
 const TEXT_CARD_STYLE = TextStyle(color: Colors.white, fontSize: 15.0);
 
 class ReusableVideoCard extends StatelessWidget {
   String video_id;
-  ReusableVideoCard({Key? key, required this.video_id}) : super(key: key);
+  final DocumentReference<Object?> reference;
+
+  ReusableVideoCard({Key? key, required this.video_id, required this.reference})
+      : super(key: key);
 
   Future<Video> _setMetadata() async {
     // The video object contains all in relation of a YouTube Video
@@ -72,7 +78,7 @@ class ReusableVideoCard extends StatelessWidget {
                     ),
                     // The row is the text and the icon
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(11, 0, 4, 6),
+                      padding: const EdgeInsets.fromLTRB(11, 0, 4, 7),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -82,15 +88,36 @@ class ReusableVideoCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: TEXT_CARD_STYLE,
                             ),
-                            flex: 5,
+                            flex: 7,
                           ),
                           Expanded(
                             child: GestureDetector(
                               onTap: () => print('Options'),
                               child: const Icon(
-                                Icons.more_horiz,
+                                Icons.edit,
                                 color: Colors.white,
-                                size: 27,
+                                size: 20,
+                              ),
+                            ),
+                            flex: 1,
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                try {
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .collection('videos').doc(reference.id).delete();
+                                } catch (e) {
+                                  print(e);
+                                }
+                              },
+                              child: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                                size: 20,
                               ),
                             ),
                             flex: 1,

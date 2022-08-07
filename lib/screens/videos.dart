@@ -69,7 +69,7 @@ class _VideosScreenState extends State<VideosScreen> {
                 final List<Widget> widgetsList = [];
 
                 for (var videoId in videoList){
-                  final toAddWidget = ReusableVideoCard(video_id: videoId['videoID']);
+                  final toAddWidget = ReusableVideoCard(video_id: videoId['videoID'], reference: videoId.reference);
                   widgetsList.add(toAddWidget);
                 }
                 return Column(children: widgetsList);

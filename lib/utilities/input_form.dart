@@ -36,7 +36,7 @@ class InputFormS extends StatelessWidget {
             try {
               final user = await _auth.signInWithEmailAndPassword(
                   email: controllerEmail.text, password: controllerPass.text);
-              print(user);
+              
               Navigator.push(
                 context,
                 MaterialPageRoute(
