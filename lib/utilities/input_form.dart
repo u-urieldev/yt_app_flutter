@@ -25,10 +25,7 @@ class _InputFormSState extends State<InputFormS> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.network(
-          'https://logodownload.org/wp-content/uploads/2018/09/youtube-go-logo-5.png',
-          width: 120,
-        ),
+        Image.asset('assets/images/logo.png', width: 120,) ,
         const SizedBox(height: 50),
         ReusableInput(
           controller: controllerEmail,
@@ -132,6 +129,7 @@ class ReusableInput extends StatelessWidget {
       height: 50,
       margin: const EdgeInsets.only(bottom: 30),
       child: TextField(
+        obscureText: label == 'Password' ? true : false,
         keyboardType: type,
         controller: controller,
         style: const TextStyle(color: Colors.white),

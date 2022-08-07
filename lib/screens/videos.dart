@@ -41,7 +41,7 @@ class _VideosScreenState extends State<VideosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentUser!.email.toString()),
+        title: const Text('Your Videos'),
         backgroundColor: Colors.black,
       ),
       floatingActionButton: FloatingActionButton(

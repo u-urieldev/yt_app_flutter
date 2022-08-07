@@ -23,7 +23,7 @@ class DialogReusable extends StatelessWidget {
             TextButton(
                 onPressed: () async {
                   setState(() {
-                    content = CircularProgressIndicator();
+                    content = const CircularProgressIndicator();
                     titleText = "Uploading...";
                   });
 
