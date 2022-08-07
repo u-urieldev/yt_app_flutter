@@ -9,10 +9,6 @@ class InputFormS extends StatelessWidget {
   final controllerPass = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  void login() async {
-    print('User login');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,13 +32,20 @@ class InputFormS extends StatelessWidget {
         const SizedBox(height: 30),
         GestureDetector(
           child: const ReusableButton(text: 'Login'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VideosScreen(),
-              ),
-            );
+          onTap: () async {
+            try {
+              final user = await _auth.signInWithEmailAndPassword(
+                  email: controllerEmail.text, password: controllerPass.text);
+              print(user);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(),
+                ),
+              );
+            } catch (e) {
+              print(e);
+            }
           },
         ),
         GestureDetector(
