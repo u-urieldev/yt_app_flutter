@@ -69,15 +69,8 @@ class MetadataSection extends StatelessWidget {
     return Text(text + '\n', style: kMetadataVideo);
   }
 
-  void durationText(Duration? duration){
-    print(duration.toString().split('.').first.padLeft(8, "0"));
-
-    
-  }
-
   @override
   Widget build(BuildContext context) {
-    durationText(video.duration);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:yt_app/screens/player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../screens/videos.dart';
+import 'dialog_reusable.dart';
 
 const TEXT_CARD_STYLE = TextStyle(color: Colors.white, fontSize: 15.0);
 
@@ -23,12 +23,25 @@ class ReusableVideoCard extends StatelessWidget {
     return video;
   }
 
+  void editVideo(firestore, idTxt) {
+    try {
+      firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('videos')
+          .doc(reference.id)
+          .set({"videoID": idTxt});
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _setMetadata(),
       builder: (context, AsyncSnapshot snapshot) {
-        String title = "Loading...";
+        var title = "Loading...";
 
         if (snapshot.hasData) {
           title = snapshot.data!.title.toString();
@@ -76,7 +89,7 @@ class ReusableVideoCard extends StatelessWidget {
                           end: Alignment.center,
                           colors: [Colors.black, Colors.transparent]),
                     ),
-                    // The row is the text and the icon
+                    // The row is for the text and icons
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(11, 0, 4, 7),
                       child: Row(
@@ -92,7 +105,18 @@ class ReusableVideoCard extends StatelessWidget {
                           ),
                           Expanded(
                             child: GestureDetector(
-                              onTap: () => print('Options'),
+                              onTap: () async {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      final videoIDController =
+                                          TextEditingController();
+                                      return DialogReusable(
+                                        videoIDController: videoIDController,
+                                        dbAction: editVideo,
+                                      );
+                                    });
+                              },
                               child: const Icon(
                                 Icons.edit,
                                 color: Colors.white,
@@ -109,7 +133,9 @@ class ReusableVideoCard extends StatelessWidget {
                                       .collection('users')
                                       .doc(FirebaseAuth
                                           .instance.currentUser!.uid)
-                                      .collection('videos').doc(reference.id).delete();
+                                      .collection('videos')
+                                      .doc(reference.id)
+                                      .delete();
                                 } catch (e) {
                                   print(e);
                                 }

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../utilities/reusableVideoCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../utilities/dialog_reusable.dart';
 
 // 'A_g3lMcWVy0',
 // 'L2cnLYuTuuQ'
@@ -27,6 +28,10 @@ class _VideosScreenState extends State<VideosScreen> {
         .collection('videos');
   }
 
+  void addVideo(firestore, idTxt) {
+    getVideosPath(_firestore).add({'videoID': idTxt});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,46 +44,38 @@ class _VideosScreenState extends State<VideosScreen> {
             context: context,
             builder: (BuildContext context) {
               final videoIDController = TextEditingController();
-              return AlertDialog(
-                insetPadding: const EdgeInsets.symmetric(vertical: 270),
-                title: const Text('Enter an ID YouTube Video'),
-                content:
-                    Center(child: TextField(controller: videoIDController)),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        getVideosPath(_firestore)
-                            .add({'videoID': videoIDController.text});
-                        Navigator.pop(context, 'CANCEL');
-                      },
-                      child: const Text('OK')),
-                  TextButton(
-                      onPressed: () => Navigator.pop(context, 'CANCEL'),
-                      child: const Text('Cancel')),
-                ],
-              );
+              return DialogReusable(videoIDController: videoIDController, dbAction: addVideo,);
             }),
         child: const Icon(Icons.add),
       ),
-      body: Column(children: [
-        StreamBuilder <QuerySnapshot>(
+      body: ListView(children: [
+        StreamBuilder<QuerySnapshot>(
             stream: getVideosPath(_firestore).snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.hasData){
+              if (snapshot.hasData) {
                 final videoList = snapshot.data!.docs;
                 final List<Widget> widgetsList = [];
 
-                for (var videoId in videoList){
-                  final toAddWidget = ReusableVideoCard(video_id: videoId['videoID'], reference: videoId.reference);
+                for (var videoId in videoList) {
+                  final toAddWidget = ReusableVideoCard(
+                      video_id: videoId['videoID'],
+                      reference: videoId.reference);
+
                   widgetsList.add(toAddWidget);
                 }
                 return Column(children: widgetsList);
-
               } else {
-                return const Center(child: Text('No data', style: TextStyle(color: Colors.black),),);
+                return const Center(
+                  child: Text(
+                    'No data',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
               }
             })
       ]),
     );
   }
 }
+
+
