@@ -9,28 +9,33 @@ const TEXT_CARD_STYLE = TextStyle(color: Colors.white, fontSize: 15.0);
 
 class ReusableVideoCard extends StatelessWidget {
   String video_id;
+  String video_name;
   final DocumentReference<Object?> reference;
 
-  ReusableVideoCard({Key? key, required this.video_id, required this.reference})
+  ReusableVideoCard({Key? key, required this.video_id, required this.reference, required this.video_name})
       : super(key: key);
 
-  Future<Video> _setMetadata() async {
-    // The video object contains all in relation of a YouTube Video
+  // Future<Video> _setMetadata() async {
+  //   // The video object contains all in relation of a YouTube Video
+  //   var yt = YoutubeExplode();
+  //   Video video =
+  //       await yt.videos.get('https://www.youtube.com/watch?v=$video_id');
+
+  //   return video;
+  // }
+
+  void editVideo(firestore, idTxt) async{
     var yt = YoutubeExplode();
     Video video =
-        await yt.videos.get('https://www.youtube.com/watch?v=$video_id');
+        await yt.videos.get('https://www.youtube.com/watch?v=$idTxt');
 
-    return video;
-  }
-
-  void editVideo(firestore, idTxt) {
     try {
       firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('videos')
           .doc(reference.id)
-          .set({"videoID": idTxt});
+          .set({"videoID": idTxt, "videoName": video.title});
     } catch (e) {
       print(e);
     }
@@ -38,22 +43,13 @@ class ReusableVideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _setMetadata(),
-      builder: (context, AsyncSnapshot snapshot) {
-        var title = "Loading...";
-
-        if (snapshot.hasData) {
-          title = snapshot.data!.title.toString();
-        }
-
-        // All the card is wraped whit a GestureDetector
-        return GestureDetector(
-          onTap: () => Navigator.push(
+    return GestureDetector(
+          onTap: () =>
+           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PlayerScreen(
-                video: snapshot.data,
+                video_id: video_id, //snapshot.data
               ),
             ),
           ),
@@ -97,7 +93,7 @@ class ReusableVideoCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              title,
+                              video_name,
                               overflow: TextOverflow.ellipsis,
                               style: TEXT_CARD_STYLE,
                             ),
@@ -157,7 +153,5 @@ class ReusableVideoCard extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }

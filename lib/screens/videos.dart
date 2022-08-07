@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../utilities/reusableVideoCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utilities/dialog_reusable.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 // 'A_g3lMcWVy0',
 // 'L2cnLYuTuuQ'
@@ -28,8 +29,12 @@ class _VideosScreenState extends State<VideosScreen> {
         .collection('videos');
   }
 
-  void addVideo(firestore, idTxt) {
-    getVideosPath(_firestore).add({'videoID': idTxt});
+  void addVideo(firestore, idTxt) async{
+    var yt = YoutubeExplode();
+    Video video =
+        await yt.videos.get('https://www.youtube.com/watch?v=$idTxt');
+
+    getVideosPath(_firestore).add({'videoID': idTxt, 'videoName': video.title});
   }
 
   @override
@@ -56,10 +61,11 @@ class _VideosScreenState extends State<VideosScreen> {
                 final videoList = snapshot.data!.docs;
                 final List<Widget> widgetsList = [];
 
-                for (var videoId in videoList) {
+                for (var video in videoList) {
                   final toAddWidget = ReusableVideoCard(
-                      video_id: videoId['videoID'],
-                      reference: videoId.reference);
+                      video_id: video['videoID'],
+                      video_name: video['videoName'],
+                      reference: video.reference);
 
                   widgetsList.add(toAddWidget);
                 }

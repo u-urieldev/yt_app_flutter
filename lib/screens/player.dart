@@ -7,8 +7,20 @@ const kMetadataVideo = TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold);
 const kCounterText = TextStyle(fontWeight: FontWeight.bold);
 
 class PlayerScreen extends StatelessWidget {
-  final Video video;
-  const PlayerScreen({Key? key, required this.video}) : super(key: key);
+  final video_id;
+
+  const PlayerScreen({Key? key, required this.video_id}) : super(key: key);
+
+  // Future<Video> _setMetadata() async {
+  //   // The video object contains all in relation of a YouTube Video
+  //   var yt = YoutubeExplode();
+  //   Video video =
+  //       await yt.videos.get('https://www.youtube.com/watch?v=$video_id');
+
+  //   return video;
+  // }
+
+  //TODO: Future Builder
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,7 @@ class PlayerScreen extends StatelessWidget {
         child: Column(
           children: [
             YouTubeWidget(
-              video_id: video.id.toString(),
+              video_id: video_id,
             ),
             MetadataSection(video: video),
             Expanded(
