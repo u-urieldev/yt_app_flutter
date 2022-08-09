@@ -9,3 +9,6 @@ App in Flutter, which alows save and reproduce YouTube videos by simple passing 
 <hr>
 
 [<img src="assets/images/login_s.png" width="250"/>](image.png)
+[<img src="assets/images/videos_s.png" width="250"/>](image.png)
+[<img src="assets/images/player_s.png" width="250"/>](image.png)
+
