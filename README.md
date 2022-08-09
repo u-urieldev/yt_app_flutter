@@ -12,4 +12,4 @@ App in Flutter, which alows save and reproduce YouTube videos by simple passing 
 ![videos_screen_img](https://github.com/u-urieldev/yt_app_flutter/blob/master/assets/images/videos_s.png)
 ![player_screen_img](https://github.com/u-urieldev/yt_app_flutter/blob/master/assets/images/player_s.png)
 
-<img src="https://github.com/u-urieldev/yt_app_flutter/blob/master/assets/images/login_s.png" alt="Italian Trulli", width="100", height="300">
+<img src="assets/images/login_s.png" alt="login_screen_img", width="100", height="300">
