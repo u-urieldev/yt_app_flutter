@@ -1,4 +1,4 @@
-# YouTube app.
+# Personal YouTube app.
 
 [<img src="assets/images/login_s.png" width="220"/>](image.png)
 [<img src="assets/images/videos_s.png" width="220"/>](image.png)
